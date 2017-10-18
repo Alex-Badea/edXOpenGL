@@ -70,7 +70,10 @@ mat4 Transform::lookAt(vec3 eye, vec3 up) {
 	
 	//Rotation first, translation afterwards!
 	//We want to make sure we're translating with respect to the
-	//newly created coordinate frame of the camera;
+	//old coordinate frame; we don't want the rotation to be affected by the
+	//any other position of the eye offset from the origin; translating first 
+	//and then rotating would be the equivalent of translating the eye relative to its own
+	//coordinate system which is inherently wrong
 	return rotMat*transMat;
 	//SAFETY WARNING: the following is what happens when you translate prior to rotating (not good!):
 	//return transMat*rotMat;
